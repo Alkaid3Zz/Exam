@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>数据一致性测试</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 20px; }
+        .test-case { margin: 20px 0; padding: 15px; border: 1px solid #ddd; border-radius: 5px; }
+        .success { background-color: #d4edda; border-color: #c3e6cb; }
+        .info { background-color: #d1ecf1; border-color: #bee5eb; }
+        .warning { background-color: #fff3cd; border-color: #ffeaa7; }
+        .step { margin: 10px 0; padding: 10px; background: #f8f9fa; border-left: 4px solid #007bff; }
+    </style>
+</head>
+<body>
+    <h1>数据一致性优化测试</h1>
+    
+    <div class="test-case success">
+        <h3>✅ 已完成的优化</h3>
+        <ul>
+            <li><strong>统一数据管理</strong>：所有页面都使用PracticeManager管理数据</li>
+            <li><strong>实时数据同步</strong>：使用DataSync确保数据一致性</li>
+            <li><strong>一致的正确率计算</strong>：首页、练习页面、错题本使用相同的统计逻辑</li>
+            <li><strong>跨页面数据更新</strong>：任何页面的数据变化都会同步到其他页面</li>
+        </ul>
+    </div>
+
+    <div class="test-case info">
+        <h3>🔧 技术实现</h3>
+        <ul>
+            <li><strong>PracticeManager</strong>：统一的练习数据管理器</li>
+            <li><strong>DataSync</strong>：数据同步工具，支持跨页面数据更新</li>
+            <li><strong>事件驱动</strong>：使用自定义事件通知数据变化</li>
+            <li><strong>localStorage监听</strong>：支持跨标签页数据同步</li>
+        </ul>
+    </div>
+
+    <div class="test-case warning">
+        <h3>📋 数据一致性测试步骤</h3>
+        
+        <div class="step">
+            <h4>步骤1：验证初始数据一致性</h4>
+            <ol>
+                <li>打开 <a href="http://localhost:3001" target="_blank">首页</a>，记录显示的统计数据</li>
+                <li>打开 <a href="http://localhost:3001/practice" target="_blank">练习页面</a>，对比正确率和进度</li>
+                <li>打开 <a href="http://localhost:3001/wrong-questions" target="_blank">错题本</a>，查看错题数量</li>
+            </ol>
+            <p><strong>预期结果</strong>：三个页面显示的数据应该完全一致</p>
+        </div>
+
+        <div class="step">
+            <h4>步骤2：验证数据更新同步</h4>
+            <ol>
+                <li>在练习页面答几道题（答对一些，答错一些）</li>
+                <li>返回首页，检查统计数据是否实时更新</li>
+                <li>查看错题本，确认新的错题已经显示</li>
+            </ol>
+            <p><strong>预期结果</strong>：所有页面的数据应该立即同步更新</p>
+        </div>
+
+        <div class="step">
+            <h4>步骤3：验证错题本操作同步</h4>
+            <ol>
+                <li>在错题本中重新答对一道错题</li>
+                <li>返回首页，检查错题数量是否减少</li>
+                <li>查看练习页面，确认正确率是否更新</li>
+            </ol>
+            <p><strong>预期结果</strong>：错题本的操作应该同步到所有页面</p>
+        </div>
+
+        <div class="step">
+            <h4>步骤4：验证跨标签页同步</h4>
+            <ol>
+                <li>打开两个标签页，都访问应用</li>
+                <li>在一个标签页中进行练习</li>
+                <li>切换到另一个标签页，检查数据是否同步</li>
+            </ol>
+            <p><strong>预期结果</strong>：跨标签页的数据应该保持同步</p>
+        </div>
+    </div>
+
+    <div class="test-case info">
+        <h3>🎯 数据一致性保证</h3>
+        <ul>
+            <li><strong>单一数据源</strong>：所有数据都通过PracticeManager管理</li>
+            <li><strong>统一计算逻辑</strong>：正确率 = 正确题目数 / 已完成题目数</li>
+            <li><strong>实时同步</strong>：数据变化时立即触发同步事件</li>
+            <li><strong>状态一致</strong>：题目的attempted和isCorrect状态在所有页面保持一致</li>
+        </ul>
+    </div>
+
+    <div class="test-case success">
+        <h3>📊 统计数据说明</h3>
+        <ul>
+            <li><strong>总题目数</strong>：题库中的题目总数</li>
+            <li><strong>练习进度</strong>：已经做过的题目数量（attempted = true）</li>
+            <li><strong>正确率</strong>：正确题目数 ÷ 已完成题目数 × 100%</li>
+            <li><strong>错题数量</strong>：做过但答错的题目数量（attempted = true && isCorrect = false）</li>
+        </ul>
+    </div>
+
+    <script>
+        console.log('数据一致性优化完成！');
+        console.log('主要改进：');
+        console.log('1. 统一使用PracticeManager管理数据');
+        console.log('2. 实现DataSync跨页面数据同步');
+        console.log('3. 确保所有页面的统计数据一致');
+        console.log('4. 支持实时数据更新和跨标签页同步');
+        
+        // 模拟数据一致性检查
+        function checkDataConsistency() {
+            const practiceData = localStorage.getItem('practiceQuestions');
+            if (practiceData) {
+                const questions = JSON.parse(practiceData);
+                const attempted = questions.filter(q => q.attempted).length;
+                const correct = questions.filter(q => q.attempted && q.isCorrect).length;
+                const incorrect = questions.filter(q => q.attempted && !q.isCorrect).length;
+                const correctRate = attempted > 0 ? Math.round((correct / attempted) * 100) : 0;
+                
+                console.log('当前数据状态：');
+                console.log(`总题目：${questions.length}`);
+                console.log(`已完成：${attempted}`);
+                console.log(`正确：${correct}`);
+                console.log(`错误：${incorrect}`);
+                console.log(`正确率：${correctRate}%`);
+            } else {
+                console.log('暂无练习数据');
+            }
+        }
+        
+        // 每5秒检查一次数据状态
+        setInterval(checkDataConsistency, 5000);
+        checkDataConsistency();
+    </script>
+</body>
+</html>

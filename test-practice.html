@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>练习功能测试</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 20px; }
+        .test-case { margin: 20px 0; padding: 15px; border: 1px solid #ddd; border-radius: 5px; }
+        .success { background-color: #d4edda; border-color: #c3e6cb; }
+        .info { background-color: #d1ecf1; border-color: #bee5eb; }
+    </style>
+</head>
+<body>
+    <h1>练习功能优化测试</h1>
+    
+    <div class="test-case success">
+        <h3>✅ 优化完成的功能</h3>
+        <ul>
+            <li><strong>智能跳转逻辑</strong>：进入练习页面时自动跳转到第一个未做过的题目</li>
+            <li><strong>题目状态管理</strong>：每道题都有 attempted 和 isCorrect 字段记录状态</li>
+            <li><strong>错题本功能</strong>：做错的题目自动标记，可在错题本查看</li>
+            <li><strong>准确的正确率统计</strong>：基于实际完成的题目数量计算</li>
+            <li><strong>进度保存</strong>：使用 localStorage 持久化保存练习进度</li>
+        </ul>
+    </div>
+
+    <div class="test-case info">
+        <h3>🔧 技术实现</h3>
+        <ul>
+            <li><strong>PracticeManager</strong>：新的练习管理器，处理题目状态和统计</li>
+            <li><strong>PracticeQuestion接口</strong>：扩展Question接口，添加attempted和isCorrect字段</li>
+            <li><strong>智能查找算法</strong>：findFirstUnattemptedQuestionIndex 和 findNextUnattemptedQuestionIndex</li>
+            <li><strong>实时统计更新</strong>：每次答题后立即更新统计信息</li>
+        </ul>
+    </div>
+
+    <div class="test-case info">
+        <h3>📋 测试步骤</h3>
+        <ol>
+            <li>访问 <a href="http://localhost:3001/practice" target="_blank">练习页面</a></li>
+            <li>做几道题（答对一些，答错一些）</li>
+            <li>刷新页面，验证是否跳转到下一个未做过的题目</li>
+            <li>查看统计信息是否正确显示</li>
+            <li>访问错题本，确认错题正确显示</li>
+        </ol>
+    </div>
+
+    <div class="test-case success">
+        <h3>🎯 预期效果</h3>
+        <ul>
+            <li><strong>第一次进入</strong>：从第1题开始</li>
+            <li><strong>做到第3题后重新进入</strong>：自动跳转到第4题（如果第4题未做过）</li>
+            <li><strong>答错题目</strong>：自动加入错题本，显示错题标识</li>
+            <li><strong>正确率计算</strong>：做了3题，答对2题，正确率显示 67%</li>
+            <li><strong>完成提示</strong>：所有题目完成后显示总结信息</li>
+        </ul>
+    </div>
+
+    <script>
+        console.log('练习功能优化完成！');
+        console.log('主要改进：');
+        console.log('1. 智能跳转到未完成题目');
+        console.log('2. 准确的错题本功能');
+        console.log('3. 精确的正确率统计');
+        console.log('4. 持久化进度保存');
+    </script>
+</body>
+</html>
